@@ -5,14 +5,14 @@
 # Find and replace following tags with real values:
 #
 # <DEVICE NAME>
-# <MAC ADDRES>
+# <MAC ADDRESS>
 # <TOKEN>
 #
 mqtt:
   - climate:
       name: "<Device name>"
       device:
-        identifiers: <MAC ADDRES>
+        identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
         name: Electrolux Heater 
         model: Electrolux Air Gate Transformer DI 4.0
@@ -87,7 +87,7 @@ mqtt:
         {% endif %}
         
   - number:
-      name: "Установка мощьности нагрева (0 - авто режим)"
+      name: "Установка мощности нагрева (0 - авторежим)"
       unique_id: "electrolux_<MAC ADDRESS>_heater_power"
       device:
         identifiers: <MAC ADDRESS>
@@ -110,8 +110,8 @@ mqtt:
       icon: mdi:lightning-bolt-outline
       
   - sensor:
-      name: "Текущая мощьность"
-      unique_id: "ectrolux_<MAC ADDRESS>_heater_power"
+      name: "Текущая мощность"
+      unique_id: "electrolux_<MAC ADDRESS>_heater_power"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -128,7 +128,7 @@ mqtt:
       
   - switch:
       name: "Подсветка дисплея"
-      unique_id: "ectrolux_<MAC ADDRESS>_backlight"
+      unique_id: "electrolux_<MAC ADDRESS>_backlight"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -149,7 +149,7 @@ mqtt:
       
   - switch:
       name: "Звук кнопок"
-      unique_id: "ectrolux_<MAC ADDRESS>_volume"
+      unique_id: "electrolux_<MAC ADDRESS>_volume"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -167,7 +167,7 @@ mqtt:
 
   - switch:
       name: "Блокировка от детей"
-      unique_id: "ectrolux_<MAC ADDRESS>_child_lock"
+      unique_id: "electrolux_<MAC ADDRESS>_child_lock"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -185,7 +185,7 @@ mqtt:
 
   - switch:
       name: "Обнаружение открытого окна"
-      unique_id: "ectrolux_<MAC ADDRESS>_damper"
+      unique_id: "electrolux_<MAC ADDRESS>_damper"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -253,8 +253,8 @@ mqtt:
       icon: mdi:sprout
 
   - switch:
-      name: "Автоотключение дисплея "
-      unique_id: "ectrolux_<MAC ADDRESS>_dimmer"
+      name: "Автоотключение дисплея"
+      unique_id: "electrolux_<MAC ADDRESS>_dimmer"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
@@ -272,5 +272,6 @@ mqtt:
             payload_available: "false"
             payload_not_available: "true"
             
+
 
 
