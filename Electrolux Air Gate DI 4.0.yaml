@@ -252,26 +252,77 @@ mqtt:
         0{{value}}
       icon: mdi:sprout
 
+  # Сенсор для хранения текущего состояния program_data/0
+  - sensor:
+      name: "Electrolux Program Data 0"
+      unique_id: "electrolux_<MAC ADDRESS>_program_data_0"
+      state_topic: "rusclimate/46/<TOKEN>/state/program_data/0"
+      availability:
+          - topic: "rusclimate/46/<TOKEN>/state/error/connection"
+            payload_available: "false"
+            payload_not_available: "true"
+  
+  # Переключатель "Автоотключение дисплея"
   - switch:
       name: "Автоотключение дисплея"
       unique_id: "electrolux_<MAC ADDRESS>_dimmer"
       device:
         identifiers: <MAC ADDRESS>
         manufacturer: Rusklimat
-        name: Electrolux Heater 
+        name: Electrolux Heater
         model: Electrolux Air Gate Transformer DI 4.0
       state_topic: "rusclimate/46/<TOKEN>/state/program_data/0"
       command_topic: "rusclimate/46/<TOKEN>/control/program_data/0"
-      payload_on: "000100"
-      payload_off: "000000"
-      value_template: >
-          000{{ value[3] }}00
+      value_template: >-
+        {% if value | length >= 6 %}
+          {{ 'ON' if value[3] == '1' else 'OFF' }}
+        {% else %}
+          OFF
+        {% endif %}
+      command_template: >-
+        {% set current = states('sensor.electrolux_program_data_0') %}
+        {% if current != 'unknown' and current | length >= 6 %}
+          000{{ '1' if value == 'ON' else '0' }}0{{ current[5] }}
+        {% else %}
+          000{{ '1' if value == 'ON' else '0' }}00
+        {% endif %}
       icon: mdi:television-ambient-light
       availability:
           - topic: "rusclimate/46/<TOKEN>/state/error/connection"
             payload_available: "false"
             payload_not_available: "true"
+  
+  # Переключатель "Половина мощности"
+  - switch:
+      name: "Ограничение потребления"
+      unique_id: "electrolux_<MAC ADDRESS>_half_power"
+      device:
+        identifiers: <MAC ADDRESS>
+        manufacturer: Rusklimat
+        name: Electrolux Heater
+        model: Electrolux Air Gate Transformer DI 4.0
+      state_topic: "rusclimate/46/<TOKEN>/state/program_data/0"
+      command_topic: "rusclimate/46/<TOKEN>/control/program_data/0"
+      value_template: >-
+        {% if value | length >= 6 %}
+          {{ 'ON' if value[5] == '1' else 'OFF' }}
+        {% else %}
+          OFF
+        {% endif %}
+      command_template: >-
+        {% set current = states('sensor.electrolux_program_data_0') %}
+        {% if current != 'unknown' and current | length >= 6 %}
+          000{{ current[3] }}0{{ '1' if value == 'ON' else '0' }}
+        {% else %}
+          00000{{ '1' if value == 'ON' else '0' }}
+        {% endif %}
+      icon: mdi:power-socket-eu
+      availability:
+          - topic: "rusclimate/46/<TOKEN>/state/error/connection"
+            payload_available: "false"
+            payload_not_available: "true"
             
+
 
 
 
