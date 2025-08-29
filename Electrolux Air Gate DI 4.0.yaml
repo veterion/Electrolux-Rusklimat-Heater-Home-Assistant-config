@@ -321,8 +321,3 @@ mqtt:
           - topic: "rusclimate/46/<TOKEN>/state/error/connection"
             payload_available: "false"
             payload_not_available: "true"
-            
-
-
-
-
