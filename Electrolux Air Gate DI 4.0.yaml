@@ -1,6 +1,6 @@
 #
 # Electrolux Air Gate DI 4.0 configuration for Home Assistant mqtt integration
-# 
+# EVU-4I
 # Redirect all mqtt://mqtt.cloud.rusklimat.ru:8883/ requests to your local SSL MQTT server. You could use your local static DNS record for that.
 # Find and replace following tags with real values:
 #
@@ -127,7 +127,7 @@ mqtt:
       icon: mdi:heat-wave
       
   - switch:
-      name: "Подсветка дисплея"
+      name: "Яркость дисплея"
       unique_id: "electrolux_<MAC ADDRESS>_backlight"
       device:
         identifiers: <MAC ADDRESS>
@@ -321,3 +321,4 @@ mqtt:
           - topic: "rusclimate/46/<TOKEN>/state/error/connection"
             payload_available: "false"
             payload_not_available: "true"
+
